@@ -1,5 +1,6 @@
 import express from "express";
 
+
 import movieRoutes from "./routes/movies.routes.js"
 
 const app = express ();

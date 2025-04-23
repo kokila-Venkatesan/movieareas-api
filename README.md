@@ -9,3 +9,6 @@ provide a movie areas for react js app
 4. `git add .`
 5. `git commit -m "first commit"`
 6. `git push -u origin main / master` 
+
+
+
