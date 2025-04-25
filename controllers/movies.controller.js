@@ -11,7 +11,7 @@ export const MovieCreate = async (req, res) => {
 //console.log (req.body);
 
 // validate your data
-const newMovie = new Movie ({
+const newMovie = new movie ({
     title: req.body.title,
     desc: req.body.desc,
 });
