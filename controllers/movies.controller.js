@@ -38,7 +38,7 @@ export const MovieDetails = async(req,res) => {
         const movie = await Movie.findById(req.params.id);
 
         if (movie == null){
-            returnres.status(404).json({message: "cannot find movie"});
+            return res.status(404).json({message: "cannot find movie"});
 
         }
         else {
@@ -49,23 +49,44 @@ export const MovieDetails = async(req,res) => {
     }
 }
 export const MovieUpdate = async (req, res) => {
-    if (req.body.title != null){
-        res.movie.title = req.body.title;
+
+    try {
+        const result = await Movie.findOneAndUpdate (
+            {_id: req.params.id}, 
+            {
+            title: req.body.title,
+            desc: req.body.desc,
+        },
+        {
+            new: true,
+            upsert: true,
+        }
+    );
+    res.status(200).json(result);
+
+    } 
+    catch (error) {
+          res.status(400).json({message: error.message});
+
     }
-
-    if (req.body.desc != null){
-        res.movie.desc = req.body.desc;
-    }
-try {
-    const updateMovie = await res.movie.save();
-    res.json(updateMovie);
-
-} catch (error) {
-    res.status(400).json({message: error.message});
-
-
 }
-}
+//     if (req.body.title != null){
+//         res.movie.title = req.body.title;
+//     }
+
+//     if (req.body.desc != null){
+//         res.movie.desc = req.body.desc;
+//     }
+// try {
+//     const updateMovie = await res.movie.save();
+//     res.json(updateMovie);
+
+// } catch (error) {
+//     res.status(400).json({message: error.message});
+
+
+// }
+
 
 export const MovieDelete = (req, res)=> {
     res.send ("Delete movies");
